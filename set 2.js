@@ -192,3 +192,33 @@ function scytaleCipher(message, shift) {
     
     return encodedMessage
 }
+
+
+/**
+ * Scytale decipher
+ *
+ * Decrypts a message that was originally encrypted with the `scytaleCipher` function above.
+ *
+ * Example:
+ * scytaleDecipher('IMNNA_FTAOIGROE', 3) -> 'INFORMATION_AGE'
+ * scytaleDecipher('AOTSRIOALRH_EMRNGIMA_PTT', 8) -> 'ALGORITHMS_ARE_IMPORTANT'
+ * scytaleDecipher('IRIANMOGFANEOT__', 4) -> 'INFORMATION_AGE_'
+ *
+ * @param {string} message A string of uppercase English letters and underscores. Underscores represent spaces.
+ * @param {Number} shift A positive integer that does not exceed the length of the message
+ */
+function scytaleDecipher(message, shift) {
+    let numRows = Math.ceil(message.length / shift);
+    let decipheredMessage = ''; 
+
+    for (let col = 0; col < shift; col++){
+        for (let row = 0; row < numRows; row++) {
+            let index = row * shift + col;
+            if (index < message.length) {
+                decipheredMessage += message[index];
+            }
+        }
+    }
+    
+    return decipheredMessage
+}
