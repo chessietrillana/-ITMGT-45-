@@ -31,3 +31,30 @@ function shiftLetter(letter,shift) {
     const shiftedCharCode = ((charCode - base + shift) % 26) + base;
     return String.fromCharCode(shiftedCharCode)
 }
+
+/**
+ * Caesar cipher
+ *
+ * Apply a shift number to a string of uppercase English letters and spaces.
+ *
+ * @param {string} message A string of uppercase English letters and/or spaces
+ * @param {Number} shift The number by which to shift the letters
+ * @returns {string} The message, shifted appropriately.
+ */
+function caesarCipher(message, shift) {
+    shift = shift % 26;
+    let result ='';
+    for (let i = 0; i <message.length; i++){
+        let char = message[i]
+        if (char >= 'A' && char <= 'Z') {
+            let shiftedCharCode = char.charCodeAt(0) + shift;
+            if(shiftedCharCode > 'Z'.charCodeAt(0)) {
+                shiftedCharCode = shiftedCharCode - 26;
+            }
+        result += String.fromCharCode(shiftedCharCode)
+        } else {
+        result += char;
+    }
+}
+return result;
+}
