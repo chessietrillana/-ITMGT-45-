@@ -86,3 +86,45 @@ function shiftByLetter(letter, letterShift) {
     return String.fromCharCode(newCharCode);
 }
 
+/**
+ * Vigenere cipher
+ *
+ * Encrypt a message using a keyphrase instead of a static number.
+ * Every letter in the message is shifted by the number represented by the respective letter in the key.
+ * Spaces are ignored.
+ *
+ * Example
+ * vigenereCipher('A C', 'KEY') -> 'K A'
+ *
+ * If needed, the keyphrase is extended to match the length of the key.
+ * If the key is 'KEY' and the message is 'LONGTEXT', the key will be extended to 'KEYKEYKE'.
+ *
+ * @param {string} message A string of uppercase English letters and/or spaces
+ * @param {string} key A string of uppercase English letters, no spaces. Will not exceed the length of the message.
+ * @returns {string} The message, shifted appropriately
+ */
+function vigenereCipher(message, key) {
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    function shiftChar(char, keyChar) {
+        const charIndex = alphabet.indexOf(char);
+        const keyIndex = alphabet.indexOf(keyChar);
+        return alphabet[(charIndex + keyIndex) % 26];
+    }
+
+    let encryptedMessage = ""; 
+    let keyIndex = 0; 
+
+    for (let i = 0; i < message.length; i++) {
+        if (message[i] === " ") {
+            encryptedMessage += " ";
+            keyIndex++;
+        } else {
+
+            encryptedMessage += shiftChar(message[i], key[keyIndex % key.length]);
+            keyIndex++;
+        }
+    }
+
+    return encryptedMessage
+}
