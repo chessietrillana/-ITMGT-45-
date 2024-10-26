@@ -2,6 +2,7 @@
  * Set 1
  * This assignment will develop your familiarity with doing simple computations in JS.
  */
+
 /**
  * Savings
  * Calculate the money remaining for an employee after taxes and expenses.
