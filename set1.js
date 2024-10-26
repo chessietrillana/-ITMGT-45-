@@ -42,3 +42,22 @@ function materialWaste(totalMaterial, materialUnits, numJobs, jobConsumption) {
     let remainingMaterial = totalMaterial - totalConsumed; 
     return remainingMaterial + materialUnits;
 }
+
+/**
+ * Interest
+ * Calculate the final value of an investment after gaining simple interest over a number of periods.
+ *
+ * To get sample interest, simply multiply the principal to the quantity (rate * time). Add this amount to the principal to get the final value.
+ *
+ * Round down the final amount.
+ *
+ * @param {Number} principal The principal, or starting, amount invested, expressed in centavos
+ * @param {Number} rate The interest rate per period, expressed as a decimal representation of a percentage (e.g., 3% is 0.03)
+ * @param {Number} periods The number of periods invested
+ * @returns {Number} The final value of the investment
+ */
+function interest(principal, rate, periods) {
+    let sampleinterest = principal * (rate * periods)
+    let finalAmount = Math.floor(principal + sampleinterest)
+    return finalAmount
+}
