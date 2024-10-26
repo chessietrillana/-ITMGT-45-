@@ -21,4 +21,24 @@ function savings(grossPay, taxRate, expenses) {
     return remaining;
 }
 
-console.log(savings,(100, 0.15, 12));
+/**
+ * Material waste
+ * Calculate how much material input will be wasted after running a number of jobs that consume a set amount of material.
+ *
+ * To get the waste of a set of jobs:
+ * 1. Multiply the number of jobs by the material consumption per job
+ * 2. Subtract the total material consumed from the total material available
+ *
+ * Format the output as a string, annotated with the units in which the material is expressed. Do not add a space between the number and the unit.
+ *
+ * @param {Number} totalMaterial
+ * @param {string} materialUnits
+ * @param {Number} numJobs
+ * @param {Number} jobConsumption
+ * @returns {string} The amount of remaining material expressed with its unit (e.g., "10kg")
+ */
+function materialWaste(totalMaterial, materialUnits, numJobs, jobConsumption) {
+    let totalConsumed = numJobs * jobConsumption; 
+    let remainingMaterial = totalMaterial - totalConsumed; 
+    return remainingMaterial + materialUnits;
+}
