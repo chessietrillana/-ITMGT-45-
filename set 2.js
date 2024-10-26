@@ -82,7 +82,6 @@ function shiftByLetter(letter, letterShift) {
     if (newCharCode > 'Z'.charCodeAt(0)) {
         newCharCode = newCharCode - 26;
     }
-
     return String.fromCharCode(newCharCode);
 }
 
@@ -105,27 +104,22 @@ function shiftByLetter(letter, letterShift) {
  */
 function vigenereCipher(message, key) {
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
     function shiftChar(char, keyChar) {
         const charIndex = alphabet.indexOf(char);
         const keyIndex = alphabet.indexOf(keyChar);
         return alphabet[(charIndex + keyIndex) % 26];
     }
-
     let encryptedMessage = ""; 
     let keyIndex = 0; 
-
     for (let i = 0; i < message.length; i++) {
         if (message[i] === " ") {
             encryptedMessage += " ";
             keyIndex++;
         } else {
-
             encryptedMessage += shiftChar(message[i], key[keyIndex % key.length]);
             keyIndex++;
         }
     }
-
     return encryptedMessage
 }
 
@@ -172,24 +166,19 @@ function vigenereCipher(message, key) {
 function scytaleCipher(message, shift) {
     let messageLength = message.length; 
     let remainder = messageLength % shift;
-
     if (remainder !== 0) {
         let padding = shift - remainder;
         message += '_'.repeat(padding);
         messageLength = message.length;
     }
-
     let encodedMessage = '';
     let numRows = messageLength / shift;
-
     for (let i = 0; i < messageLength; i++) {
         let row = Math.floor(i/shift);
         let col = i % shift; 
         let index = col * numRows + row;
-
         encodedMessage += message[index];
     }
-    
     return encodedMessage
 }
 
@@ -210,7 +199,6 @@ function scytaleCipher(message, shift) {
 function scytaleDecipher(message, shift) {
     let numRows = Math.ceil(message.length / shift);
     let decipheredMessage = ''; 
-
     for (let col = 0; col < shift; col++){
         for (let row = 0; row < numRows; row++) {
             let index = row * shift + col;
@@ -219,6 +207,5 @@ function scytaleDecipher(message, shift) {
             }
         }
     }
-    
     return decipheredMessage
 }
