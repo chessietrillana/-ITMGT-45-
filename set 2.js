@@ -128,3 +128,67 @@ function vigenereCipher(message, key) {
 
     return encryptedMessage
 }
+
+/**
+ * Scytale cipher
+ *
+ * Encrypts a message by simulating a scytale cipher.
+ *
+ * A scytale is a cylinder around which you can wrap a long strip of
+ *      parchment that contained a string of apparent gibberish. The parchment,
+ *      when read using the scytale, would reveal a message due to every nth
+ *      letter now appearing next to each other, revealing a proper message.
+ * This encryption method is obsolete and should never be used to encrypt
+ *      data in production settings.
+ *
+ * You may read more about the method here:
+ *      https://en.wikipedia.org/wiki/Scytale
+ *
+ * You may follow this algorithm to implement a scytale-style cipher:
+ * 1. Take a message to be encoded and a "shift" number.
+ *      For this example, we will use "INFORMATION_AGE" as
+ *      the message and 3 as the shift.
+ * 2. Check if the length of the message is a multiple of
+ *      the shift. If it is not, add additional underscores
+ *      to the end of the message until it is.
+ *      In this example, "INFORMATION_AGE" is already a multiple of 3,
+ *      so we will leave it alone.
+ * 3. This is the tricky part. Construct the encoded message.
+ *      For each index i in the encoded message, use the character at the index
+ *      (i // shift) + (len(message) // shift) * (i % shift) of the raw message.
+ *      If this number doesn't make sense, you can play around with the cipher at
+ *       https://dencode.com/en/cipher/scytale to try to understand it.
+ * 4. Return the encoded message. In this case,
+ *      the output should be "IMNNA_FTAOIGROE".
+ *
+ * Example
+ * scytaleCipher('INFORMATION_AGE', 3) -> 'IMNNA_FTAOIGROE'
+ * scytaleCipher('INFORMATION_AGE', 4) -> 'IRIANMOGFANEOT__'
+ * scytaleCipher('ALGORITHMS_ARE_IMPORTANT', 8) -> 'AOTSRIOALRH_EMRNGIMA_PTT'
+ *
+ * @param {string} message A string of uppercase English letters and underscores. Underscores represent spaces.
+ * @param {number} shift A positive integer that does not exceed the length of the message
+ */
+function scytaleCipher(message, shift) {
+    let messageLength = message.length; 
+    let remainder = messageLength % shift;
+
+    if (remainder !== 0) {
+        let padding = shift - remainder;
+        message += '_'.repeat(padding);
+        messageLength = message.length;
+    }
+
+    let encodedMessage = '';
+    let numRows = messageLength / shift;
+
+    for (let i = 0; i < messageLength; i++) {
+        let row = Math.floor(i/shift);
+        let col = i % shift; 
+        let index = col * numRows + row;
+
+        encodedMessage += message[index];
+    }
+    
+    return encodedMessage
+}
