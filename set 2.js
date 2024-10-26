@@ -58,3 +58,31 @@ function caesarCipher(message, shift) {
 }
 return result;
 }
+
+/**
+ * Shift by letter
+ *
+ * Shift a letter to the right using the number equivalent of another letter.
+ * The shift letter is any letter from A to Z, where A represents 0, B represents 1, ..., Z represents 25.
+ *
+ * Examples
+ * shiftByLetter('A', 'A') -> 'A'
+ * shiftByLetter('A', 'C') -> 'C'
+ * shiftByLetter('B', 'K') -> 'L'
+ * shiftByLetter(' ', _) -> ' '
+ *
+ * @param {string} letter A single uppercase English letter, or a space
+ * @param {string} letterShift A single uppercase English letter
+ * @returns {string} The letter, shifted appropriately
+ */
+function shiftByLetter(letter, letterShift) {
+    if (letter === ' ') return ' ';
+    let shiftValue = letterShift.charCodeAt(0) - 'A'.charCodeAt(0);
+    let newCharCode = letter.charCodeAt(0) + shiftValue; 
+    if (newCharCode > 'Z'.charCodeAt(0)) {
+        newCharCode = newCharCode - 26;
+    }
+
+    return String.fromCharCode(newCharCode);
+}
+
