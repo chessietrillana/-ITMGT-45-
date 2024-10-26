@@ -2,7 +2,6 @@
  * Set 1
  * This assignment will develop your familiarity with doing simple computations in JS.
  */
-
 /**
  * Savings
  * Calculate the money remaining for an employee after taxes and expenses.
@@ -17,7 +16,9 @@
  * @returns {Number} The number of centavos remaining from an employee's pay after taxes and expenses
  */
 function savings(grossPay, taxRate, expenses) {
-    let afterTaxPay = Math.floor(grossPay*(1-taxRate));
-    let remaining = afterTaxPay - expenses;
+    let afterTaxPay = Math.floor(grossPay * (1-taxRate));
+    let remaining = afterTaxPay - expenses; 
     return remaining;
 }
+
+console.log(savings,(100, 0.15, 12));
