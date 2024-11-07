@@ -50,3 +50,54 @@ function relationshipStatus(fromMember, toMember, socialGraph) {
         return "no relationship";
     }
 }
+
+/**
+ * Tic tac toe
+ *
+ * Tic Tac Toe is a common paper-and-pencil game.
+ * Players must attempt to draw a line of their symbol across a grid.
+ * The player that does this first is considered the winner.
+ *
+ * This function evaluates a Tic Tac Toe game board and returns the winner.
+ *
+ * Please see the sample data for examples of `board`.
+ *
+ * @param {Array} board The representation of the Tic Tac Toe board as a square array of arrays. The size of the array will range between 3x3 to 6x6.
+ * The board will never have more than 1 winner.
+ * There will only ever be 2 unique symbols at the same time.
+ * @returns {string} the symbol of the winner, or "NO WINNER" if there is no winner.
+ */
+function ticTacToe(board) {
+    const n = board.length;
+
+    for (let i = 0; i < n; i++) {
+        if (board[i].every(cell => cell === board[i][0] && cell !== "")) {
+            return board[i][0];
+        }
+    }
+
+    for (let i = 0; i < n; i++) {
+        let column = [];
+        for (let j = 0; j < n; j++) {
+            column.push(board[j][i]);
+        }
+        if (column.every(cell => cell === column[0] && cell !== "")) {
+            return column[0];
+        }
+    }
+
+    let diagonal1 = [];
+    let diagonal2 = [];
+    for (let i = 0; i < n; i++) {
+        diagonal1.push(board[i][i]); 
+        diagonal2.push(board[i][n - 1 - i]);
+    }
+    if (diagonal1.every(cell => cell === diagonal1[0] && cell !== "")) {
+        return diagonal1[0];
+    }
+    if (diagonal2.every(cell => cell === diagonal2[0] && cell !== "")) {
+        return diagonal2[0];
+    }
+
+    return "NO WINNER";
+}
