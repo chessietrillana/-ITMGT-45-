@@ -101,3 +101,40 @@ function ticTacToe(board) {
 
     return "NO WINNER";
 }
+
+/**
+ * ETA
+ *
+ * A shuttle van service is tasked to travel one way along a predefined circular route.
+ * The route is divided into several legs between stops.
+ * The route is fully connected to itself.
+ *
+ * This function returns how long it will take the shuttle to arrive at a stop after leaving anothe rstop.
+ *
+ * Please see the sample data for examples of `routeMap`.
+ *
+ * @param {string} firstStop the stop that the shuttle will leave
+ * @param {string} secondStop the stop that the shuttle will arrive at
+ * @param {object} routeMap the data describing the routes
+ * @returns {Number} the time that it will take the shuttle to travel from firstStop to secondStop
+ */
+function eta(firstStop, secondStop, routeMap) {
+    let current = firstStop;
+    let totalTime = 0;
+    
+    while (current !== secondStop) {
+        let next = null;
+        for (const [routeLeg, details] of Object.entries(routeMap)) {
+            const [start, end] = routeLeg.split(',');
+            if (start === current) {
+                next = end;
+                totalTime += details.travel_time_mins;
+                break;
+            }
+        }
+        
+        current = next;
+    }
+    
+    return totalTime;
+}
